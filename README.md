@@ -15,7 +15,7 @@ This repository contains AWS Terraform learning projects. The first project is:
 
 The app runs an **NGINX web server on EC2** in the **Default VPC** (public subnet). Access is via HTTP (80); administrative access uses **AWS Systems Manager Session Manager** (no inbound SSH).
 
-![Project 1 Architecture](docs/architecture/project1-ec2-nginx.png)
+![Project 1 Architecture](docs/architecture/01-project-ec2-nginx.png)
 
 **Notes**
 - Default VPC: public subnet(s) + IGW + DNS, ready for immediate use.
