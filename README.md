@@ -11,6 +11,18 @@ This repository contains AWS Terraform learning projects. The first project is:
 - Best practices: provider pinning, SSM Session Manager (no SSH by default), least‑privilege SG (HTTP only), unified business tags (`X-Environment`, `X-Customer`, `X-Dept`, `X-Contact`).
 - Robust **.gitignore** to prevent committing state, tfvars, keys/certs.
 
+## Architecture
+
+The app runs an **NGINX web server on EC2** in the **Default VPC** (public subnet). Access is via HTTP (80); administrative access uses **AWS Systems Manager Session Manager** (no inbound SSH).
+
+![Project 1 Architecture](docs/architecture/project1-ec2-nginx.png)
+
+**Notes**
+- Default VPC: public subnet(s) + IGW + DNS, ready for immediate use.
+- OS: Amazon Linux (AL2).
+- Admin access: Session Manager (close port 22).
+
+
 ---
 ## Quick Start (Terraform)
 ```bash
