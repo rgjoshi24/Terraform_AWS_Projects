@@ -1,13 +1,19 @@
-# Project 01: Simple EC2 with NGINX
+# Project 01: Simple EC2 With NGINX
 
 ## Overview
-This project provisions a single **Amazon EC2** instance running **Amazon Linux** and installs the **NGINX** web server using `user_data`. It’s a minimal example to learn basic Terraform EC2 provisioning and cloud-init configuration.
+This project provisions a single **Amazon EC2** instance running **Amazon Linux** and installs the **NGINX** web server using Terraform. It demonstrates how to use Terraform to deploy a basic compute resource and configure it using `user_data`.
 
 ## Features
-- EC2 instance in your chosen region
-- Security Group allowing **HTTP (80)** and **SSH (22)**
-- `user_data` installing and starting **NGINX**
-- Output of the instance **public IP**
+- Launches an EC2 instance in a specified AWS region.
+- Installs NGINX automatically using cloud-init `user_data`.
+- Creates a Security Group allowing inbound **HTTP (port 80)** and **SSH (port 22)**.
+- Outputs the instance **public IP** for easy access.
+
+## Architecture
+A simple architecture:
+- **EC2 Instance**: Amazon Linux
+- **Security Group**: Allows HTTP and SSH
+- **NGINX** installed via `user_data`
 
 ## Prerequisites
 - Terraform `>= 1.5`
@@ -15,13 +21,22 @@ This project provisions a single **Amazon EC2** instance running **Amazon Linux*
 - An existing **EC2 Key Pair** in the target region (for SSH), referenced by its **key pair name** (not the local `.pem` path)
 
 ## Quick Start
-```bash
-terraform init
-terraform apply -auto-approve
-```
-**Access NGINX**: Open `http://<instance_public_ip>` in your browser.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rgjoshi24/Terraform_AWS_Projects.git
+   cd Terraform_AWS_Projects/01_Simple_EC2_With_NGINX
+   ```
+2. Initialize and apply:
+   ```bash
+   terraform init
+   terraform apply -auto-approve
+   ```
+3. Access NGINX:
+   ```
+   http://<instance_public_ip>
+   ```
 
-## Typical Variables
+## Example Variables
 ```hcl
 region        = "ca-central-1"
 instance_type = "t3.micro"
@@ -40,9 +55,10 @@ output "instance_public_ip" {
 terraform destroy -auto-approve
 ```
 
-## Notes
+## Notes & Best Practices
 - Ensure your **key pair** exists in AWS (e.g., `testaws`), and SSH with the corresponding local PEM file:
   ```bash
   ssh -i /path/to/testaws.pem ec2-user@<instance_public_ip>
   ```
 - Keep your PEM file permissions strict (`chmod 0400`).
+- Use tags for governance and cost tracking if needed.
