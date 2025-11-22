@@ -8,6 +8,7 @@ This repository contains beginner-friendly **Terraform projects** for deploying 
 ## Table of Contents
 - [Project 01: Simple EC2 with NGINX](#project-01-simple-ec2-with-nginx)
 - [Project 02: AWS VPC with Bastion & NAT](#project-02-aws-vpc-with-bastion--nat)
+- [Project 03: Modular AWS VPC with Bastion & NAT](#project-03-modular-aws-vpc-with-bastion--nat)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
 - [Repository Structure](#repository-structure)
@@ -43,6 +44,18 @@ A beginner-friendly network setup in **`ca-central-1`** that creates:
 
 ---
 
+## Project 03: Modular AWS VPC with Bastion & NAT
+This project refactors Project 02 into a **modular structure** for better scalability and maintainability.
+
+**Highlights:**
+- Separate modules for VPC, Network, Security, and Compute
+- Explicit dependencies for IGW and NAT routes
+- Parameterized instance types and global tags
+
+[View Full Details](03_AWS_VPC_Bastion_NAT_Modular/README.md)
+
+---
+
 ## Prerequisites
 Before you begin, ensure you have:
 - **Terraform**: Version `>= 1.5` installed. [Download Terraform](https://developer.hashicorp.com/terraform/downloads)
@@ -67,6 +80,10 @@ To get started with these projects:
    - For Project 02:
      ```bash
      cd 02_AWS_VPC_Bastion_NAT
+     ```
+   - For Project 03:
+     ```bash
+     cd 03_AWS_VPC_Bastion_NAT_Modular
      ```
 3. Initialize Terraform:
    ```bash
@@ -95,6 +112,17 @@ Terraform_AWS_Projects/
 │   ├── outputs.tf
 │   ├── architecture.png
 │   └── README.md
+├── 03_AWS_VPC_Bastion_NAT_Modular/
+│   ├── provider.tf
+│   ├── variables.tf
+│   ├── main.tf
+│   ├── README.md
+│   ├── architecture.png
+│   └── modules/
+│       ├── vpc/main.tf
+│       ├── network/main.tf
+│       ├── security/main.tf
+│       └── compute/main.tf
 └── README.md (this file)
 ```
 
