@@ -31,7 +31,7 @@ A beginner-friendly network setup in **`ca-central-1`** that creates:
 - NAT Gateway for private subnet outbound connectivity
 - Tags applied to all resources for governance
 
-[View Project 02 Details](02_tf-beginner-vpc/README.md)
+[View Project 02 Details](02_AWS_VPC_Bastion_NAT/README.md)
 
 ---
 
