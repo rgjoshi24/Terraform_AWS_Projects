@@ -10,8 +10,6 @@ Deploy a simple network in **`ca-central-1`**:
 - **Bastion Host** in public subnet; SSH allowed only from **your IP**
 - **Private Host** in private subnet; SSH allowed only **from Bastion SG**
 
-![Architecture](architecture.png)
-
 ## Prerequisites
 - Terraform `>= 1.5`
 - AWS CLI configured with credentials

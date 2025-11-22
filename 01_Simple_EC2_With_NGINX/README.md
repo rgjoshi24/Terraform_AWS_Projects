@@ -45,4 +45,4 @@ terraform destroy -auto-approve
   ```bash
   ssh -i /path/to/testaws.pem ec2-user@<instance_public_ip>
   ```
-- Keep your PEM file permissions strict (`chmod 600`).
+- Keep your PEM file permissions strict (`chmod 0400`).
