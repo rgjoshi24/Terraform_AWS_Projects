@@ -19,8 +19,6 @@ This project provisions a **Virtual Private Cloud (VPC)** in AWS with a secure n
 - **Bastion Host**: Amazon Linux EC2 instance in public subnet
 - **Private Host**: Amazon Linux EC2 instance in private subnet
 
-![Architecture Diagram](architecture.png)
-
 ## Features
 - Secure SSH access to Bastion Host from your IP only
 - Private Host accessible only via Bastion Host
