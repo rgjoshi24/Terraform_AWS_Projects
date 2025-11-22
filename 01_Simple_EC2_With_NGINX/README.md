@@ -1,24 +1,48 @@
-# 01_Simple_EC2_With_NGINX
+# Project 01: Simple EC2 with NGINX
 
-Launch a single EC2 instance in the **Default VPC**, install **NGINX via Chef (chef‑solo)**, and serve a page:
+## Overview
+This project provisions a single **Amazon EC2** instance running **Amazon Linux** and installs the **NGINX** web server using `user_data`. It’s a minimal example to learn basic Terraform EC2 provisioning and cloud-init configuration.
 
-> *Simple Project to create EC2 instance on AWS and Install NGINX using Chef Cookbook*
+## Features
+- EC2 instance in your chosen region
+- Security Group allowing **HTTP (80)** and **SSH (22)**
+- `user_data` installing and starting **NGINX**
+- Output of the instance **public IP**
 
-## Run
+## Prerequisites
+- Terraform `>= 1.5`
+- AWS CLI configured with credentials
+- An existing **EC2 Key Pair** in the target region (for SSH), referenced by its **key pair name** (not the local `.pem` path)
+
+## Quick Start
 ```bash
-cp example.tfvars terraform.tfvars
 terraform init
-terraform apply
-open "$(terraform output -raw site_url)"
+terraform apply -auto-approve
+```
+**Access NGINX**: Open `http://<instance_public_ip>` in your browser.
+
+## Typical Variables
+```hcl
+region        = "ca-central-1"
+instance_type = "t3.micro"
+key_name      = "<your-ec2-keypair-name>"
 ```
 
-## Destroy
+## Outputs
+```hcl
+output "instance_public_ip" {
+  description = "Public IP of the EC2 instance"
+}
+```
+
+## Cleanup
 ```bash
-terraform destroy
+terraform destroy -auto-approve
 ```
 
 ## Notes
-- SSH is **disabled** by default; use AWS **SSM Session Manager** for access.
-- Security Group allows **HTTP (80)** from anywhere.
-- Business tags applied to resources: `X-Environment`, `X-Customer`, `X-Dept`, `X-Contact`.
-- Local state, tfvars, backend config, keys/certs are **gitignored** at repo root.
+- Ensure your **key pair** exists in AWS (e.g., `testaws`), and SSH with the corresponding local PEM file:
+  ```bash
+  ssh -i /path/to/testaws.pem ec2-user@<instance_public_ip>
+  ```
+- Keep your PEM file permissions strict (`chmod 600`).

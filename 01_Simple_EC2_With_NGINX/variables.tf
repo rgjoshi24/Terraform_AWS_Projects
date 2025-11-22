@@ -55,5 +55,5 @@ variable "x_dept" {
 variable "x_contact" {
   description = "Contact email or Slack"
   type        = string
-  default     = "ramjosh@example.com"
+  default     = "test@example.com"
 }

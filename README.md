@@ -1,46 +1,49 @@
-# Terraform_AWS_Projects
+# Terraform AWS Projects
 
-This repository contains AWS Terraform learning projects. The first project is:
+[![Terraform](https://img.shields.io/badge/Terraform->=1.5-blue)](https://www.terraform.io/) [![AWS](https://img.shields.io/badge/AWS-Cloud-orange)](https://aws.amazon.com/)
 
-- **01_Simple_EC2_With_NGINX** – Launches a single EC2 instance **in the Default VPC**, installs **NGINX** using cloud-init `user_data`, and serves a simple page:
-
-  > *Simple Project to create AWS EC2 instance using Terraform and Install Webserver*
-
-### What’s included
-- **Terraform** only
-- Best practices: provider pinning, SSM Session Manager (no SSH by default), least‑privilege SG (HTTP only), unified business tags (`X-Environment`, `X-Customer`, `X-Dept`, `X-Contact`).
-- Robust **.gitignore** to prevent committing state, tfvars, keys/certs.
-
-## Architecture
-
-The app runs an **NGINX web server on EC2** in the **Default VPC** (public subnet). Access is via HTTP (80); administrative access uses **AWS Systems Manager Session Manager** (no inbound SSH).
-
-![Project 1 Architecture](docs/architecture/01-project-ec2-nginx.png)
-
-**Notes**
-- Default VPC: public subnet(s) + IGW + DNS, ready for immediate use.
-- OS: Amazon Linux (AL2).
-- Admin access: Session Manager (close port 22).
-
+## Table of Contents
+- [Project 01: Simple EC2 with NGINX](#project-01-simple-ec2-with-nginx)
+- [Project 02: Beginner VPC with Bastion & NAT](#project-02-beginner-vpc-with-bastion--nat)
 
 ---
-## Quick Start (Terraform)
-```bash
-cd 01_Simple_EC2_With_NGINX
-cp example.tfvars terraform.tfvars   # edit region and X-* tags if needed
-terraform init
-terraform apply
-open "$(terraform output -raw site_url)"
-# cleanup
-terraform destroy
-```
 
-## Aliases (optional)
-Add to your `~/.zshrc`:
-```bash
-alias tf='terraform'
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
-alias tfd='terraform destroy'
+## Project 01: Simple EC2 with NGINX
+A minimal Terraform configuration that launches a single **Amazon Linux** EC2 instance, installs **NGINX** via `user_data`, and exposes the welcome page on **HTTP (80)**.
+
+**Highlights:**
+- EC2 instance with a security group allowing **HTTP (80)** and **SSH (22)**.
+- Cloud-init `user_data` installs and starts **NGINX**.
+- Outputs the instance **public IP** for quick access.
+
+[View Project 01 Details](01_Simple_EC2_With_NGINX/README.md)
+
+---
+
+## Project 02: Beginner VPC with Bastion & NAT
+A beginner-friendly network setup in **`ca-central-1`** that creates:
+- **VPC** with public and private subnets
+- **Internet Gateway**, **NAT Gateway**, and route tables
+- **Bastion Host** in public subnet and **Private Host** in private subnet
+
+**Highlights:**
+- Secure SSH access via Bastion
+- NAT Gateway for private subnet outbound connectivity
+- Tags applied to all resources for governance
+
+[View Project 02 Details](02_tf-beginner-vpc/README.md)
+
+---
+
+## Repository Structure
+```
+Terraform_AWS_Projects/
+├── 01_Simple_EC2_With_NGINX/
+│   ├── main.tf
+│   └── README.md
+├── 02_tf-beginner-vpc/
+│   ├── provider.tf
+│   ├── main.tf
+│   └── README.md
+└── README.md (this file)
 ```
